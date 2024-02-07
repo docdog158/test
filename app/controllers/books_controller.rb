@@ -7,8 +7,8 @@ class BooksController < ApplicationController
     @user = @book.user
     @post_comment = PostComment.new
     #タグ機能
-    @tag_list = @book.tags.pluck(:name).join(',')
-    @booktags = @book.tags
+    #@tag_list = @book.tags.pluck(:name).join(',')
+    #@booktags = @book.tags
   end
 
   def index
@@ -18,7 +18,7 @@ class BooksController < ApplicationController
     #@books = Book.all.order(created_at: :desc)
     
     #タグ機能
-    @tag_list = Tag.all
+    #@tag_list = Tag.all
     #リストの切り替え
     if params[:latest]
       @books = Book.latest
@@ -36,11 +36,11 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     #タグ機能
-    tag_list = params[:book][:name].split(',')
+    #tag_list = params[:book][:name].split(',')
     
     if @book.save
       #タグ機能
-      @book.save_tags(tag_list)
+      #@book.save_tags(tag_list)
       
       redirect_to book_path(@book), notice: "本の投稿ができました"
     else
@@ -51,7 +51,7 @@ class BooksController < ApplicationController
   
   def search_tag
     @tag_list = Tag.all
-    @tag = Tag.find(params[:tag_id])
+    #@tag = Tag.find(params[:tag_id])
     @Book = @tag.books
   end
   
@@ -64,11 +64,11 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     #タグ機能
-    tag_list=params[:book][:name].split(',')
+    #tag_list=params[:book][:name].split(',')
     
     if @book.update(book_params)
       #タグ機能
-      @book.save_tags(tag_list)
+      #@book.save_tags(tag_list)
       
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
